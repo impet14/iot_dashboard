@@ -1,20 +1,32 @@
 /* styles.css */
 
 /* General Background Styling */
+html, body {
+    margin: 0;  /* Remove any default margin */
+    padding: 0;  /* Remove any default padding */
+    width: 100%;  /* Set body to full width */
+    height: 100%;  /* Set body to full height */
+    overflow: hidden;  /* Prevent scrollbars */
+}
+
 .background {
     background-image: url('background.jpg');  /* Ensure 'background.jpg' is in the assets folder */
     background-size: cover;
     background-position: center;
-    height: 560px;  /* Fixed height */
-    width: 960px;  /* Fixed width */
-    padding: 30px;
+    width: 100%;  /* Ensure it fills the parent width */
+    height: 100vh;  /* Use full viewport height */
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: auto;  /* Center the container */
-    position: relative;  /* For absolute positioning of company name */
+    margin: 0;  /* Remove any default margin */
+    padding: 0;  /* Remove padding */
+    position: absolute;  /* Absolute positioning to fill entire screen */
+    top: 0;  /* Position at the top */
+    left: 0;  /* Position at the left */
 }
+
+
 
 /* Powered by RaasPal Text Styling */
 .powered-by {
@@ -99,24 +111,18 @@
     margin-bottom: 10px;
 }
 
+/* Apply Pulse Animation to All Icons */
 .metric-icon {
-    font-size: 2.5em;
-    color: #ffcc00;
-    margin-top: 10px;
+    animation: pulse 2s infinite;  /* Apply pulse animation */
+    display: inline-block;  /* Make sure icon is inline for proper animation */
+    transition: transform 0.2s;  /* Smooth transition */
 }
 
 /* Metric Icon Styles */
-.metric-card .metric-icon {
+.metric-card {
     font-size: 1.0em;
     margin-top: 0px;
 }
-
-/* Door Status Icons
-.door-icon {
-    display: inline-block;
-    margin: 20px;
-    text-align: center;
-} */
 
 /* Door Status Icons */
 .door-status-icon {
