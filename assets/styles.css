@@ -1,0 +1,147 @@
+/* styles.css */
+
+/* General Background Styling */
+.background {
+    background-image: url('background.jpg');  /* Ensure 'background.jpg' is in the assets folder */
+    background-size: cover;
+    background-position: center;
+    height: 560px;  /* Fixed height */
+    width: 960px;  /* Fixed width */
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;  /* Center the container */
+    position: relative;  /* For absolute positioning of company name */
+}
+
+/* Powered by RaasPal Text Styling */
+.powered-by {
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffcc00;
+    text-shadow: 2px 2px 8px #000;
+    animation: slow-blink 2s infinite;  /* Slower animation rate at 0.5 Hz */
+    margin-top: auto;  /* Push to the bottom */
+    margin-bottom: 10px;  /* Add some bottom margin */
+    text-align: center;  /* Center align the text */
+}
+
+/* Disable hover animation */
+.powered-by:hover {
+    transform: none;  /* No scaling on hover */
+}
+
+/* Keyframes for the slower blinking animation */
+@keyframes slow-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;  /* Fade effect */
+    }
+}
+
+/* Main Title Styling with Animation */
+.main-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 3.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffcc00;
+    text-shadow: 2px 2px 8px #000;
+    animation: slow-blink 5s infinite;  /* Apply slow-blink animation */
+}
+
+/* Card Styling */
+.graph-card, .door-status-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+}
+
+/* Air Quality and Smell Sensor Metrics Styling */
+.airquality-metrics, .smell-metrics {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0px;
+    width: 90px;
+    height: 60px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.metric-value {
+    font-size: 0.01em;
+    color: #00ccff;
+    margin-bottom: 10px;
+}
+
+.metric-icon {
+    font-size: 2.5em;
+    color: #ffcc00;
+    margin-top: 10px;
+}
+
+/* Metric Icon Styles */
+.metric-card .metric-icon {
+    font-size: 1.0em;
+    margin-top: 0px;
+}
+
+/* Door Status Icons
+.door-icon {
+    display: inline-block;
+    margin: 20px;
+    text-align: center;
+} */
+
+/* Door Status Icons */
+.door-status-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+    position: relative;  /* For positioning the line */
+}
+
+.door-status-icon.occupied {
+    animation: pulse 1.5s infinite;  /* Add pulse animation to occupied icons */
+}
+
+/* Pulse Animation for Occupied Restrooms */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);  /* Slightly enlarge */
+        opacity: 0.8;  /* Fade slightly */
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
