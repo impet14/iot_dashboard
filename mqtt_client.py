@@ -26,6 +26,7 @@ TOPICS = [
     ("raaspal/TestdoorF1", 0),
     ("raaspal/TestdoorF2", 0),
     ("raaspal/TestdoorF3", 0),
+    ("raaspal/TestdoorF4", 0)
 ]
 
 # MQTT Callback when connecting to the broker

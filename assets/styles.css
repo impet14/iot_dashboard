@@ -30,9 +30,9 @@ html, body {
 
 /* Powered by RaasPal Text Styling */
 .powered-by {
-    font-size: 1.5em;
+    font-size: 3em;
     font-family: 'Montserrat', sans-serif;
-    color: #ffcc00;
+    color: rgb(255, 0, 0);
     text-shadow: 2px 2px 8px #000;
     animation: slow-blink 2s infinite;  /* Slower animation rate at 0.5 Hz */
     margin-top: auto;  /* Push to the bottom */
@@ -113,7 +113,7 @@ html, body {
 
 /* Apply Pulse Animation to All Icons */
 .metric-icon {
-    animation: pulse 2s infinite;  /* Apply pulse animation */
+    animation: pulse 1s infinite;  /* Apply pulse animation */
     display: inline-block;  /* Make sure icon is inline for proper animation */
     transition: transform 0.2s;  /* Smooth transition */
 }

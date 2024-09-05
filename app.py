@@ -39,57 +39,110 @@ initial_door_status = {
     "raaspal/TestdoorM3": {"magnet_status": "open"},
     "raaspal/TestdoorF1": {"magnet_status": "open"},
     "raaspal/TestdoorF2": {"magnet_status": "open"},
-    "raaspal/TestdoorF3": {"magnet_status": "open"}
+    "raaspal/TestdoorF3": {"magnet_status": "open"},
+    "raaspal/TestdoorF4": {"magnet_status": "open"} 
 }
 
-# Function to dynamically create door status with icons for male and female restrooms
 def create_door_status(doors_data):
     door_elements = []
     # Define all restrooms to be shown initially
     restrooms = {
         "raaspal/TestdoorM1": "🚹", "raaspal/TestdoorM2": "🚹", "raaspal/TestdoorM3": "🚹",
-        "raaspal/TestdoorF1": "🚺", "raaspal/TestdoorF2": "🚺", "raaspal/TestdoorF3": "🚺"
+        "raaspal/TestdoorF1": "🚺", "raaspal/TestdoorF2": "🚺", "raaspal/TestdoorF3": "🚺",
+        "raaspal/TestdoorF4": "🚺"  # New female restroom
     }
 
+    # Create icons for male restrooms first
     for door, icon in restrooms.items():
-        # Get the status or default to 'open' if not available
-        is_open = doors_data.get(door, {}).get("magnet_status", "open") == "open"
+        if icon == "🚹":  # Only male restrooms
+            is_open = doors_data.get(door, {}).get("magnet_status", "open") == "open"
 
-        # Apply style for icon
-        icon_style = {
-            "font-size": "3.5rem",  # Smaller icon size
-            "margin": "0.1rem",
-            "position": "relative",  # Position relative for overlay
-            "display": "inline-block",
-        }
+            # Apply style for icon
+            icon_style = {
+                "font-size": "2.8rem",  # Smaller icon size
+                "margin": "0.1rem",
+                "position": "relative",  # Position relative for overlay
+                "display": "inline-block",
+            }
 
-        # Animated red line for occupied restrooms
-        line_style = {
-            "content": '""',
-            "position": "absolute",
-            "top": "45%",  # Center the line vertically
-            "left": "-10%",  # Start slightly inside the icon
-            "right": "-10%",  # End slightly inside the icon
-            "height": "10px",  # Make the line thinner
-            "background-color": "rgba(255, 0, 0, 0.5)",  # 50% transparent red
-            "transform": "rotate(-45deg)",  # Rotate the line for a diagonal slash
-        }
+            # Animated red line for occupied restrooms
+            line_style = {
+                "content": '""',
+                "position": "absolute",
+                "top": "42%",  # Center the line vertically
+                "left": "-12%",  # Start slightly inside the icon
+                "right": "-10%",  # End slightly inside the icon
+                "height": "10px",  # Make the line thinner
+                "background-color": "rgba(255, 0, 0, 0.5)",  # 50% transparent red
+                "transform": "rotate(-45deg)",  # Rotate the line for a diagonal slash
+            }
 
-        # Add animation class if occupied
-        class_name = "door-status-icon" + (" occupied" if not is_open else "")
+            # Add animation class if occupied
+            class_name = "door-status-icon" + (" occupied" if not is_open else "")
 
-        # Create the icon element with a conditional red line for occupancy
-        door_elements.append(
-            html.Div(
-                children=[
-                    html.Div(icon, style=icon_style, className=class_name),  # Icon
-                    html.Div(style=line_style) if not is_open else None  # Red line only if occupied
-                ],
-                style={"position": "relative", "display": "inline-block"}  # Needed for absolute positioning
+            # Create the icon element with a conditional red line for occupancy
+            door_elements.append(
+                html.Div(
+                    children=[
+                        html.Div(icon, style=icon_style, className=class_name),  # Icon
+                        html.Div(style=line_style) if not is_open else None  # Red line only if occupied
+                    ],
+                    style={"position": "relative", "display": "inline-block"}  # Needed for absolute positioning
+                )
             )
+    
+    # Add a line emoji to separate male and female restrooms
+    door_elements.append(
+        html.Div(
+            "|",  # Line emoji
+            style={
+                "font-size": "3rem",  # Size of the line emoji
+                "margin": "0 5px",  # Add space around the divider
+                "display": "inline-block",  # Inline to align with icons
+            }
         )
-    return door_elements
+    )
 
+    # Create icons for female restrooms
+    for door, icon in restrooms.items():
+        if icon == "🚺":  # Only female restrooms
+            is_open = doors_data.get(door, {}).get("magnet_status", "open") == "open"
+
+            # Apply style for icon
+            icon_style = {
+                "font-size": "2.8rem",  # Smaller icon size
+                "margin": "0.1rem",
+                "position": "relative",  # Position relative for overlay
+                "display": "inline-block",
+            }
+
+            # Animated red line for occupied restrooms
+            line_style = {
+                "content": '""',
+                "position": "absolute",
+                "top": "45%",  # Center the line vertically
+                "left": "-10%",  # Start slightly inside the icon
+                "right": "-10%",  # End slightly inside the icon
+                "height": "10px",  # Make the line thinner
+                "background-color": "rgba(255, 0, 0, 0.5)",  # 50% transparent red
+                "transform": "rotate(-45deg)",  # Rotate the line for a diagonal slash
+            }
+
+            # Add animation class if occupied
+            class_name = "door-status-icon" + (" occupied" if not is_open else "")
+
+            # Create the icon element with a conditional red line for occupancy
+            door_elements.append(
+                html.Div(
+                    children=[
+                        html.Div(icon, style=icon_style, className=class_name),  # Icon
+                        html.Div(style=line_style) if not is_open else None  # Red line only if occupied
+                    ],
+                    style={"position": "relative", "display": "inline-block"}  # Needed for absolute positioning
+                )
+            )
+
+    return door_elements
 
 # Initialize door status elements for initial layout rendering
 door_status_elements = create_door_status(initial_door_status)
@@ -112,7 +165,7 @@ app.layout = dbc.Container(
                     dbc.Col(
                         dbc.Card(
                             [
-                                dbc.CardHeader("Air Quality Metrics", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
+                                dbc.CardHeader("คุณภาพอากาศในโชว์รูม", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
                                 dbc.CardBody(html.Div(id='airquality-metrics', className="airquality-metrics")),
                             ],
                             className="graph-card",
@@ -129,7 +182,7 @@ app.layout = dbc.Container(
                         dbc.Col(
                             dbc.Card(
                                 [
-                                    dbc.CardHeader("Smell Sensor Metrics - Female", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
+                                    dbc.CardHeader("คุณภาพอากาศห้องน้ำหญิง", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
                                     dbc.CardBody(html.Div(id='smell-metrics-female', className="smell-metrics-female")),
                                 ],
                                 className="graph-card",
@@ -140,7 +193,7 @@ app.layout = dbc.Container(
                         dbc.Col(
                             dbc.Card(
                                 [
-                                    dbc.CardHeader("Smell Sensor Metrics - Male", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
+                                    dbc.CardHeader("คุณภาพอากาศห้องน้ำชาย", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
                                     dbc.CardBody(html.Div(id='smell-metrics-male', className="smell-metrics-male")),
                                 ],
                                 className="graph-card",
@@ -157,7 +210,7 @@ app.layout = dbc.Container(
                     dbc.Col(
                         dbc.Card(
                             [
-                                dbc.CardHeader("Restroom Door Status", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
+                                dbc.CardHeader("สถานะห้องน้ำ", style={"font-size": "1rem", "font-weight": "bold"}),  # Smaller font size
                                 dbc.CardBody(html.Div(door_status_elements, id='door-status', className="door-status")),  # Set initial door status
                             ],
                             className="graph-card",  # Same class as other metric cards
@@ -168,7 +221,7 @@ app.layout = dbc.Container(
                 ),
 
                 # Powered by RaasPal text at the bottom
-                html.Div("Powered by RaasPal", className="powered-by", style={"font-size": "1rem"}),  # Moved to bottom
+                html.Div("Powered by RaasPal", className="powered-by", style={"font-size": "1.5em"}),  # Moved to bottom
             ],
             style={
                 "width": "100%",         # Responsive width
@@ -206,15 +259,15 @@ def update_dashboard(n):
     airquality = data['airquality']
     airquality_metrics = []
     metric_data = [
-        ("🌡️", f"Temp: {airquality['temperature']}°C"),
-        ("💧", f"Humidity: {airquality['humidity']}%"),
+        ("🌡️", f"อุณหภูมิ: {airquality['temperature']}°C"),
+        ("💧", f"ความชื้น: {airquality['humidity']}%"),
         ("🌫️", f"CO2: {airquality['co2']} ppm"),
         ("🌁", f"PM2.5: {airquality['pm2_5']} µg/m³"),
         ("🏭", f"PM10: {airquality['pm10']} µg/m³"),
         ("🧪", f"TVOC: {airquality['tvoc']} ppb"),
-        ("🌬️", f"Pressure: {airquality['pressure']} hPa"),
+        ("🌬️", f"ความดัน: {airquality['pressure']} hPa"),
         ("⚗️", f"HCHO: {airquality['hcho']} mg/m³"),
-        ("💡", f"Light: {airquality['light_level']}"),
+        ("💡", f"แสงสว่าง: {airquality['light_level']}"),
         ("🚶", f"PIR: {airquality['pir']}")
     ]
 
@@ -241,10 +294,10 @@ def update_dashboard(n):
     smell_female = data['smellfamale']
     smell_metrics_female = []
     metric_data_female = [
-        ("🔋", f"Battery: {smell_female.get('battery', 0)}%"),  # Using .get() to safely access dictionary keys
-        ("🌡️", f"Temp: {smell_female.get('temperature', 0)}°C"),
-        ("💧", f"Humidity: {smell_female.get('humidity', 0)}%"),
-        ("💨", f"NH3: {smell_female.get('nh3', 0)} ppm"),
+        ("🔋", f"แบตเตอรี่: {smell_female.get('battery', 0)}%"),  # Using .get() to safely access dictionary keys
+        ("🌡️", f"อุณหภูมิ: {smell_female.get('temperature', 0)}°C"),
+        ("💧", f"ความชื้น: {smell_female.get('humidity', 0)}%"),
+        ("💨", f"แอมโมเนีย (NH3): {smell_female.get('nh3', 0)} ppm"),
         ("💀", f"H2S: {smell_female.get('h2s', 0)} ppm"),
     ]
 
@@ -271,10 +324,10 @@ def update_dashboard(n):
     smell_male = data['smellmale']
     smell_metrics_male = []
     metric_data_male = [
-        ("🔋", f"Battery: {smell_male.get('battery', 0)}%"),  # Using .get() to safely access dictionary keys
-        ("🌡️", f"Temp: {smell_male.get('temperature', 0)}°C"),
-        ("💧", f"Humidity: {smell_male.get('humidity', 0)}%"),
-        ("💨", f"NH3: {smell_male.get('nh3', 0)} ppm"),
+        ("🔋", f"แบตเตอรี่: {smell_male.get('battery', 0)}%"),  # Using .get() to safely access dictionary keys
+        ("🌡️", f"อุณหภูมิ: {smell_male.get('temperature', 0)}°C"),
+        ("💧", f"ความชื้น: {smell_male.get('humidity', 0)}%"),
+        ("💨", f"แอมโมเนีย (NH3): {smell_male.get('nh3', 0)} ppm"),
         ("💀", f"H2S: {smell_male.get('h2s', 0)} ppm"),
     ]
 
