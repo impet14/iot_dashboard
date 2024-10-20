@@ -10,7 +10,8 @@ iot_data = {
     "airquality": {},
     "smellfamale": {},
     "smellmale": {},
-    "doors": {}
+    "doors": {},
+    "peoplecounter": {}  # New entry for people counter
 }
 
 # MQTT settings
@@ -26,7 +27,8 @@ TOPICS = [
     ("raaspal/TestdoorF1", 0),
     ("raaspal/TestdoorF2", 0),
     ("raaspal/TestdoorF3", 0),
-    ("raaspal/TestdoorF4", 0)
+    ("raaspal/TestdoorF4", 0),
+    ("raaspal/peoplecounter", 0)  # New topic for people counter
 ]
 
 # MQTT Callback when connecting to the broker
@@ -52,6 +54,8 @@ def on_message(client, userdata, msg):
             iot_data["smellfamale"] = data
         elif topic == "raaspal/smellmale":
             iot_data["smellmale"] = data
+        elif topic == "raaspal/peoplecounter":  # New handling for people counter
+            iot_data["peoplecounter"] = data
         else:
             iot_data["doors"][topic] = data
 
@@ -59,6 +63,7 @@ def on_message(client, userdata, msg):
         print(f"Error decoding JSON from topic `{topic}`: {e}")
     except Exception as e:
         print(f"Unexpected error processing message from `{topic}`: {e}")
+
 
 # Flask endpoint to get IoT data
 @app.route("/data", methods=["GET"])

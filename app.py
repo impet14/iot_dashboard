@@ -155,7 +155,7 @@ app.layout = dbc.Container(
             children=[
                 # Replace text title with an image title from assets folder
                 html.Div(
-                    html.Img(src='/assets/title.png', className="main-title", style={"width": "85%", "height": "auto"}),  # Reduce size
+                    html.Img(src='/assets/L-02.png', className="main-title", style={"width": "85%", "height": "auto"}),  # Reduce size
                     style={"text-align": "center", "margin-bottom": "2vh", "margin-top": "0vh"}
                 ),
                 dcc.Interval(id='interval-component', interval=2 * 1000, n_intervals=0),  # Update every 5 seconds
@@ -221,7 +221,7 @@ app.layout = dbc.Container(
                 ),
 
                 # Powered by RaasPal text at the bottom
-                html.Div("Powered by RaasPal", className="powered-by", style={"font-size": "1.5em"}),  # Moved to bottom
+                html.Div("Powered by RAASPAL", className="powered-by"),  # Moved to bottom
             ],
             style={
                 "width": "100%",         # Responsive width
@@ -355,5 +355,7 @@ def update_dashboard(n):
 
     return airquality_metrics, smell_metrics_female, smell_metrics_male, door_status_elements
 
+# if __name__ == '__main__':
+#     app.run_server(host='0.0.0.0', port=80, debug=True)
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=80, debug=True)
+    app.run_server(host='0.0.0.0', port=8080, debug=True, dev_tools_ui=False, dev_tools_props_check=False)
