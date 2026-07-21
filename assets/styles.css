@@ -1,231 +1,376 @@
-/* styles.css */
+/* ==========================================================================
+   RaasPal Smart Restroom & Showroom IoT Dashboard Design System
+   ========================================================================== */
 
-/* General Background Styling */
-html,
-body {
-    margin: 0;
-    /* Remove any default margin */
-    padding: 0;
-    /* Remove any default padding */
-    width: 100%;
-    /* Set body to full width */
-    height: 100%;
-    /* Set body to full height */
-    overflow: hidden;
-    /* Prevent scrollbars */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg-dark: #090d16;
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(56, 189, 248, 0.35);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  --primary-accent: #38bdf8;
+  --secondary-accent: #818cf8;
+  --success-glow: #10b981;
+  --warning-glow: #f59e0b;
+  --danger-glow: #ef4444;
+  --purple-glow: #a855f7;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* Background Container */
 .background {
-    background-image: url('BG-01.jpg');
-    /* Ensure 'background.jpg' is in the assets folder */
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    /* Ensure it fills the parent width */
-    height: 100vh;
-    /* Use full viewport height */
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0;
-    /* Remove any default margin */
-    padding: 0;
-    /* Remove padding */
-    position: absolute;
-    /* Absolute positioning to fill entire screen */
-    top: 0;
-    /* Position at the top */
-    left: 0;
-    /* Position at the left */
+  background-image: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                    radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.08) 0%, transparent 40%),
+                    url('BG-01.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Powered by RaasPal Text Styling */
-.powered-by {
-    font-size: 1.5em;
-    font-family: 'Montserrat', sans-serif;
-    color: #ffffff;
-    /* Start with white color */
-    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.8);
-    /* Red glow */
-    font-weight: bold;
-    position: "relative";
-    /* Make the text bold */
-    margin-top: auto;
-    /* Push to the bottom */
-    margin-bottom: 0px;
-   
-    text-align: center;
-    /* Center align the text */
-    animation: color-change 5s infinite;
-    /* Add color changing animation */
+/* Top Dashboard Header */
+.dashboard-header {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
 }
 
-/* Add a hover effect to scale the text */
-.powered-by:hover {
-    transform: scale(1.1);
-    /* Slightly enlarge on hover */
-    transition: transform 0.3s ease;
-    /* Smooth transition */
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Keyframes for color changing animation */
-@keyframes color-change {
-    0% {
-        color: #ffffff;
-        /* Start with white */
-        text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.8);
-        /* Red glow */
-    }
-
-    25% {
-        color: #ffcc00;
-        /* Change to yellow */
-        text-shadow: 0 0 20px rgba(255, 204, 0, 0.8), 0 0 30px rgba(255, 204, 0, 0.8);
-        /* Yellow glow */
-    }
-
-    50% {
-        color: #00ccff;
-        /* Change to blue */
-        text-shadow: 0 0 20px rgba(0, 204, 255, 0.8), 0 0 30px rgba(0, 204, 255, 0.8);
-        /* Blue glow */
-    }
-
-    75% {
-        color: #00ff00;
-        /* Change to green */
-        text-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.8);
-        /* Green glow */
-    }
-
-    100% {
-        color: #ffffff;
-        /* Back to white */
-        text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.8);
-        /* Red glow */
-    }
+.brand-logo {
+  max-height: 48px;
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+  transition: transform 0.3s ease;
 }
 
-/* Keyframes for the slower blinking animation */
-@keyframes slow-blink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-        /* Fade effect */
-    }
+.brand-logo:hover {
+  transform: scale(1.05);
 }
 
-/* Main Title Styling with Animation */
-.main-title {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 3.5em;
-    font-family: 'Montserrat', sans-serif;
-    color: #ffcc00;
-    text-shadow: 2px 2px 8px #000;
-    animation: slow-blink 5s infinite;
-    /* Apply slow-blink animation */
+.brand-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
 }
 
-/* Card Styling */
-.graph-card,
-.door-status-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    margin-bottom: 20px;
+.header-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--success-glow);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--success-glow);
+  animation: pulse-live 1.8s infinite;
+}
+
+@keyframes pulse-live {
+  0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Section Glass Cards */
+.graph-card, .door-status-card {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+.graph-card:hover {
+  border-color: var(--glass-border-hover) !important;
 }
 
 .card-header {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2em;
-    padding: 10px;
+  background: rgba(0, 0, 0, 0.25) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  color: var(--text-main) !important;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem !important;
+  letter-spacing: 0.03em;
+  padding: 0.85rem 1.25rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Air Quality and Smell Sensor Metrics Styling */
-.airquality-metrics,
-.smell-metrics {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    text-align: center;
+.card-header-badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
 }
 
-.metric-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 0px;
-    width: 120px;
-    height: 90px;
-    text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+/* Metric Badges Grid */
+.metric-card-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.85rem 0.6rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.metric-value {
-    font-size: 0.01em;
-    color: #00ccff;
-    margin-bottom: 10px;
+.metric-card-box:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Apply Pulse Animation to All Icons */
-.metric-icon {
-    animation: pulse 1s infinite;
-    /* Apply pulse animation */
-    display: inline-block;
-    /* Make sure icon is inline for proper animation */
-    transition: transform 0.2s;
-    /* Smooth transition */
+.metric-icon-val {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
-/* Metric Icon Styles */
-.metric-card {
-    font-size: 1.0em;
-    margin-top: 0px;
+.metric-card-box:hover .metric-icon-val {
+  transform: scale(1.15);
 }
 
-/* Door Status Icons */
-.door-status-icon {
-    font-size: 60px;
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
-    position: relative;
-    /* For positioning the line */
+.metric-label-text {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
 }
 
-.door-status-icon.occupied {
-    animation: pulse 1.5s infinite;
-    /* Add pulse animation to occupied icons */
+.metric-val-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-accent);
 }
 
-/* Pulse Animation for Occupied Restrooms */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
+/* Warning & Danger Indicator Modifiers */
+.status-good {
+  color: #34d399 !important;
+}
 
-    50% {
-        transform: scale(1.1);
-        /* Slightly enlarge */
-        opacity: 0.8;
-        /* Fade slightly */
-    }
+.status-warning {
+  color: #fbbf24 !important;
+}
 
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.status-danger {
+  color: #f87171 !important;
+  animation: pulse-danger 1.5s infinite;
+}
+
+@keyframes pulse-danger {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Door Stall Grid & Card Styling */
+.door-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.door-section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  color: var(--primary-accent);
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.stall-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0.8rem 1.2rem;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.stall-card.available {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+.stall-card.occupied {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%);
+  animation: stall-occupied-pulse 2s infinite ease-in-out;
+}
+
+@keyframes stall-occupied-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(239, 68, 68, 0.2); }
+  50% { box-shadow: 0 0 24px rgba(239, 68, 68, 0.45); }
+}
+
+.stall-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.stall-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+
+.stall-status-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stall-status-badge.available {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.stall-status-badge.occupied {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* Diagonal Occupied Overlay Line */
+.stall-occupied-slash {
+  position: absolute;
+  top: 50%;
+  left: -15%;
+  right: -15%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.85), transparent);
+  transform: translateY(-50%) rotate(-35deg);
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
+
+/* Footer / Powered By */
+.powered-by {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  animation: footer-glow 6s infinite alternate;
+}
+
+@keyframes footer-glow {
+  0% { color: #94a3b8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+  50% { color: #38bdf8; text-shadow: 0 0 15px rgba(56, 189, 248, 0.6); }
+  100% { color: #a855f7; text-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.4);
 }

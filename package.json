@@ -1,0 +1,25 @@
+{
+  "name": "iot_dashboard",
+  "version": "1.1.0",
+  "description": "Smart Restroom & Showroom Real-time Telemetry IoT Dashboard for RaasPal",
+  "main": "app.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "audit": "npm audit"
+  },
+  "keywords": [
+    "iot",
+    "dashboard",
+    "smart-restroom",
+    "mqtt",
+    "telemetry",
+    "air-quality",
+    "smell-sensors"
+  ],
+  "author": "impet14",
+  "license": "MIT",
+  "dependencies": {
+    "dompurify": "^3.3.2",
+    "mermaid": "^11.4.0"
+  }
+}
