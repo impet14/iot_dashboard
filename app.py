@@ -432,4 +432,8 @@ def update_dashboard_data(n):
 
 if __name__ == '__main__':
     print("Starting RaasPal Smart Restroom Telemetry Dashboard on http://0.0.0.0:8080...")
-    app.run_server(host='0.0.0.0', port=8080, debug=False)
+    try:
+        app.run(host='0.0.0.0', port=8080, debug=False)
+    except AttributeError:
+        app.run_server(host='0.0.0.0', port=8080, debug=False)
+
